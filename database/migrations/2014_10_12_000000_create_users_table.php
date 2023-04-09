@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->unique()->primary();
             $table->string('name');
-            $table->string('esri_id')->unique()->nullable();
+            $table->string('email')->unique()->nullable();
             $table->string('img_path')->nullable();
             $table->boolean('attendance')->default(0);
+            $table->integer('vote_count')->default(0);
+            $table->integer('voting_number')->default(0);
+            $table->string('category')->nullable();
             $table->timestamps();
         });
     }

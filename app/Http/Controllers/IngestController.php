@@ -28,14 +28,19 @@ class IngestController extends Controller
 
         // Read the CSV file and insert into the database
         $file = $request->file('csv_file');
-        $rows = array_map('str_getcsv', file($file));
+        $rows =  array_map('str_getcsv', file($file));
         $header = array_shift($rows);
 
         foreach ($rows as $row) {
             $data = array_combine($header, $row);
             $name = User::create([
-                'name' => $data['Name']
+                'name' => $data['Name'],
+                'email' => $data['Email'],
+                'category' => $data['Category']
+
             ]);
+
+
         }
 
         return redirect()

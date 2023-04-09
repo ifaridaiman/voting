@@ -22,7 +22,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'esri_id',
+        'email',
+        'category',
         'ootd_img',
         'attendance',
     ];

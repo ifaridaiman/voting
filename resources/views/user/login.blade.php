@@ -6,14 +6,19 @@
         <img src="/image/esri-logo-vote.svg" alt="Logo" class="">
     </div>
     <div class="w-full max-w-md">
+        @if(session('error'))
+            <div class="bg-red-500 p-4 rounded">
+                <p class="text-red-300 ">{{ session('error') }}</p>
+            </div>
+        @endif
         <form class="px-8 pt-6 pb-8 mb-4" method="POST" action="{{ route('user.validation') }}" >
             @csrf
             <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="esri_id">
-                    {{ __('ESRI ID') }}
+                    {{ __('Email address') }}
                 </label>
-                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="esri_id" name="esri_id" type="text" placeholder="ESM000">
-                <p class="text-muted text-xs mt-4">Use the same user id that you use in iloginhr portal.</p>
+                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="esri_id" name="esri_id" type="text" placeholder="example@esrimalaysia.com.my">
+                <p class="text-muted text-xs mt-4">Use your working email.</p>
                 @error('esri_id')
                     <p class="text-red-500 mt-2">{{ $message }}</p>
                 @enderror

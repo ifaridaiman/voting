@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\IngestController;
+use App\Http\Controllers\VotingController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +24,7 @@ Route::put('/update_image_service', [UserController::class,'update_image_service
 
 Route::get('/register', [IngestController::class,'register'])->name('ingest.register');
 Route::post('/ingest', [IngestController::class,'ingest'])->name('ingest.ingest');
+
+Route::get('/vote/king/{user_id}',[VotingController::class,'vote_male'])->name('vote.male');
+Route::get('/vote/queen/{user_id}',[VotingController::class,'vote_female'])->name('vote.female');
+Route::post('/vote_process',[VotingController::class,'vote_process'])->name('vote.process');
