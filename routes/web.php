@@ -28,3 +28,4 @@ Route::post('/ingest', [IngestController::class,'ingest'])->name('ingest.ingest'
 Route::get('/vote/king/{user_id}',[VotingController::class,'vote_male'])->name('vote.male');
 Route::get('/vote/queen/{user_id}',[VotingController::class,'vote_female'])->name('vote.female');
 Route::post('/vote_process',[VotingController::class,'vote_process'])->name('vote.process');
+Route::get('/thankyou',[VotingController::class,'thankyou'])->name('vote.thanks');

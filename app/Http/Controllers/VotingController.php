@@ -29,7 +29,7 @@ class VotingController extends Controller
         $voter = User::where('id',$request->user_id)->firstOrFail();
         $voter->voting_number = $voter->voting_number +1;
         $voter->save();
-        
+
         $user = User::where('id',$request->candidate_id)->first();
         $user->vote_count = $user->vote_count+1;
         $user->save();
@@ -37,9 +37,13 @@ class VotingController extends Controller
         if($user->category == 'king'){
             return redirect()->route('vote.female',$voter);
         }elseif($user->category == 'queen'){
-            return redirect()->route('user.login');
+            return redirect()->route('vote.thanks');
+            // return redirect()->route('user.login');
         }
 
+    }
 
+    public function thankyou(){
+        return view('vote.thankyou');
     }
 }

@@ -47,7 +47,6 @@ class UserController extends Controller
             }
         }else{
             return redirect()->route('user.update_image', ['name' => $userValidate->name]);
-
         }
 
     }

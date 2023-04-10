@@ -14,7 +14,6 @@
     <body class="antialiased">
         <div class="max-w-xl mx-auto container">
             @yield('content')
-
         </div>
     </body>
 </html>

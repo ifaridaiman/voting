@@ -6,13 +6,16 @@
 </div>
 <div class="grid grid-cols-2 gap-4 p-4">
     @foreach($candidate as $key => $value)
-        <div class="bg-white w-36 h-44 mx-auto">
-            <img src="{{ $value->img_path }}"/>
+        <div class="bg-white w-36 h-56 mx-auto">
+
             <form id="vote-form" method="POST" action="{{ route('vote.process') }}">
                 @csrf
                 <input type="hidden" name="candidate_id" value="{{ $value->id }}">
                 <input type="hidden" name="user_id" value="{{ $user_id}}">
-                <button class=" " type="button" onclick="confirmVote()">Vote Me</button>
+                <button class=" w-full mx-auto p-2 text-blue-300 hover:text-blue-500 font-bold" type="button" onclick="confirmVote()">
+                    <span>Vote Me</span>
+                    <img src="{{ $value->img_path }}"/>
+                </button>
             </form>
         </div>
     @endforeach
