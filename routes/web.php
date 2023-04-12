@@ -18,7 +18,7 @@ use App\Http\Controllers\VotingController;
 
 Route::get('/', [UserController::class,'login'])->name('user.login');
 Route::post('/login', [UserController::class,'validation'])->name('user.validation');
-Route::get('/user/{name}/update-image', [UserController::class,'update_image'])->name('user.update_image');
+Route::get('/user/{name}/update-image/{user_id}', [UserController::class,'update_image'])->name('user.update_image');
 Route::put('/update_image_service', [UserController::class,'update_image_service'])->name('user.update_image_service');
 
 
