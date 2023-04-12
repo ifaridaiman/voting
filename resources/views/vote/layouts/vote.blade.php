@@ -9,6 +9,7 @@
 </div>
 <script>
     function confirmVote() {
+       
         if(confirm("Are you sure you want to vote for this candidate?")) {
             // Submit the vote form
             document.getElementById("vote-form").submit();

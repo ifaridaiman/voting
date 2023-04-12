@@ -78,7 +78,7 @@ class UserController extends Controller
 
         // Convert the binary image data to a file
         $image = Image::make($imageBinaryData);
-        $image->rotate(90);
+        $image->rotate(270);
         Storage::put($path, (string) $image->encode());
 
         // Get the URL or path to the uploaded file

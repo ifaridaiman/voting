@@ -12,9 +12,9 @@
                 <input type="hidden" name="candidate_id" value="{{ $value->id }}">
                 <input type="hidden" name="user_id" value="{{ $user_id}}">
 
-                <button class=" w-full mx-auto p-2 text-blue-300 hover:text-blue-500 font-bold" type="button" onclick="confirmVote()">
+                <button class="w-full mx-auto p-2 text-blue-300 hover:text-blue-500 font-bold relative" type="button" onclick="confirmVote()">
                     <span>Vote Me</span>
-                    <img src="{{ $value->img_path }}"/>
+                    <img class="absolute top-0 left-0 h-full w-full object-contain" src="{{ $value->img_path }}"/>
                 </button>
             </form>
         </div>
