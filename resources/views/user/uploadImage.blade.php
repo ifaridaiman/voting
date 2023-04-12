@@ -26,7 +26,7 @@
                         {{ __('Snap your OOTD') }}
                     </label>
 
-                    <div id="my_camera"></div>
+                    {{-- <div id="my_camera"></div> --}}
                     <input type="file" id="file-input" class="hidden" accept="image/*">
 
                     <br />
