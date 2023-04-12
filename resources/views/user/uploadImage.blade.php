@@ -26,13 +26,14 @@
                         {{ __('Snap your OOTD') }}
                     </label>
 
-                    <div id="my_camera"></div>
+                    <div id="my_camera" class="mx-auto"></div>
                     <input type="file" id="file-input" class="hidden" accept="image/*">
 
                     <br />
                     <button id="take-snapshot-button" class="border border-black border-solid p-2 rounded w-full" type="button">Snap your OOTD</button>
                     <input type="hidden" name="image" class="image-tag">
                     <input type="hidden" name="username" value="{{ $name }}">
+                    <input type="hidden" name="user_id" value="{{ $user_id }}">
                 </div>
 
                 <div class="flex flex-col">
@@ -85,39 +86,39 @@
     };
 
     // If device supports Webcam.js, use it to take snapshot
-    if (isWebcamSupported()) {
-        Webcam.set({
-            width: 640,
-            height: 480,
-            image_format: 'jpeg',
-            jpeg_quality: 90,
-        });
+    // if (isWebcamSupported()) {
+    //     Webcam.set({
+    //         width: 300,
+    //         height: 150,
+    //         image_format: 'jpeg',
+    //         jpeg_quality: 90,
+    //     });
 
-        Webcam.attach('#my_camera');
+    //     Webcam.attach('#my_camera');
 
-        takeSnapshot.addEventListener('click', () => {
-            Webcam.snap((data_uri) => {
-                imageTag.value = data_uri;
-                resultsDiv.innerHTML = '<img src="' + data_uri + '"/>';
+    //     takeSnapshot.addEventListener('click', () => {
+    //         Webcam.snap((data_uri) => {
+    //             imageTag.value = data_uri;
+    //             resultsDiv.innerHTML = '<img src="' + data_uri + '"/>';
 
-                // Enable submit button when results are ready
-                if (submitButton) {
-                    submitButton.addEventListener('click', () => {
-                        if (!Webcam.loaded) {
-                            alert('Please take a photo first!');
-                            return false;
-                        }
-                    });
-                    submitButton.disabled = false;
-                    submitButton.classList.remove('bg-gray-500');
-                    submitButton.classList.add('bg-blue-500');
-                }
+    //             // Enable submit button when results are ready
+    //             if (submitButton) {
+    //                 submitButton.addEventListener('click', () => {
+    //                     if (!Webcam.loaded) {
+    //                         alert('Please take a photo first!');
+    //                         return false;
+    //                     }
+    //                 });
+    //                 submitButton.disabled = false;
+    //                 submitButton.classList.remove('bg-gray-500');
+    //                 submitButton.classList.add('bg-blue-500');
+    //             }
 
-                // Show "Retake your shot" button
-                takeSnapshot.value = 'Retake your shot';
-            });
-        });
-    } else {
+    //             // Show "Retake your shot" button
+    //             takeSnapshot.value = 'Retake your shot';
+    //         });
+    //     });
+    // } else {
         // If device does not support Webcam.js, use input type file to take snapshot
         takeSnapshot.addEventListener('click', () => {
             fileInput.click();
@@ -151,6 +152,6 @@
 
             reader.readAsDataURL(file);
         });
-    }
+    // }
 </script>
 @endsection

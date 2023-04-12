@@ -4,6 +4,12 @@
 <div class="text-center pb-10">
     <p class="font-bold text-2xl">Vote for best King attire </p>
 </div>
+@if($candidate->isEmpty())
+    <p class="text-center">There are no candidates to vote for.</p>
+    <div class="text-center mt-4">
+        <a href="{{ route('user.login') }}" class="text-blue-500 hover:text-blue-700">Go back to login page</a>
+    </div>
+@else
 <div class="grid grid-cols-2 gap-4 p-4">
     @foreach($candidate as $key => $value)
         <div class="bg-white w-36 h-56 mx-auto overflow-hidden">
@@ -20,4 +26,5 @@
         </div>
     @endforeach
 </div>
+@endif
 @endsection

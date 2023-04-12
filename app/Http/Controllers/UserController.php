@@ -43,10 +43,14 @@ class UserController extends Controller
             if ($userValidate->voting_number == 2) {
                 return redirect()->back()->with('error', 'You have used your votes. Thank you and enjoy the townhall.');
             } else {
-                return redirect()->route('vote.male',['user_id'=>$userValidate->id]);
+                if($userValidate->voting_number > 0){
+                    return redirect()->route('vote.female',$userValidate->id);
+                }else{
+                    return redirect()->route('vote.male',['user_id'=>$userValidate->id]);
+                }
             }
         }else{
-            return redirect()->route('user.update_image', ['name' => $userValidate->name]);
+            return redirect()->route('user.update_image', ['name' => $userValidate->name, 'user_id'=>$userValidate->id ]);
         }
 
     }
@@ -55,13 +59,14 @@ class UserController extends Controller
 
     // update_image_page
     // need to check either the image is available or not.
-    public function update_image($name)
+    public function update_image($name, $user_id)
     {
         $validateImage = User::where('name', $name)->whereNull('img_path')->exists();
 
         return view('user.uploadImage', [
             'name' => $name,
-            'validate_profile_img' => $validateImage
+            'validate_profile_img' => $validateImage,
+            'user_id' => $user_id
         ]);
     }
 
@@ -92,6 +97,6 @@ class UserController extends Controller
         }
         $user->save();
 
-        return redirect()->route('user.login');
+        return redirect()->route('vote.male',['user_id'=> $request->user_id]);
     }
 }
