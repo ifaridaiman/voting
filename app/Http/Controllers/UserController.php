@@ -74,28 +74,36 @@ class UserController extends Controller
     public function update_image_service(Request $request)
     {
         $imageData = $request->input('image');
-        $imageData = str_replace('data:image/jpeg;base64,', '', $imageData);
-        $imageData = str_replace(' ', '+', $imageData);
-        $imageBinaryData = base64_decode($imageData);
+        if (!empty($imageData)) {
+            $imageData = str_replace('data:image/jpeg;base64,', '', $imageData);
+            $imageData = str_replace(' ', '+', $imageData);
+            $imageBinaryData = base64_decode($imageData);
 
-        $filename = uniqid() . '.jpg';
-        $path = 'public/' . $filename;
+            $filename = uniqid() . '.jpg';
+            $path = 'public/' . $filename;
 
-        // Convert the binary image data to a file
-        $image = Image::make($imageBinaryData);
-        $image->rotate(270);
-        Storage::put($path, (string) $image->encode());
+            // Convert the binary image data to a file
+            $image = Image::make($imageBinaryData);
+            $image->rotate(270);
+            Storage::put($path, (string) $image->encode());
 
-        // Get the URL or path to the uploaded file
-        $url = Storage::url($path);
-        $path = Storage::path($path);
+            // Get the URL or path to the uploaded file
+            $url = Storage::url($path);
+            $path = Storage::path($path);
 
-        $user = User::where('name', $request->username)->first();
-        $user->img_path = $url;
-        if ($user->attendance === 0) {
-            $user->attendance = 1;
+            $user = User::where('name', $request->username)->first();
+            $user->img_path = $url;
+            if ($user->attendance === 0) {
+                $user->attendance = 1;
+            }
+            $user->save();
+        }else{
+            $user = User::where('name', $request->username)->first();
+            if ($user->attendance === 0) {
+                $user->attendance = 1;
+            }
+            $user->save();
         }
-        $user->save();
 
         return redirect()->route('vote.male',['user_id'=> $request->user_id]);
     }

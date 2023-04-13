@@ -21,14 +21,14 @@ class VotingController extends Controller
     public function vote_male($user_id)
     {
         $voter = $this->checkUser($user_id);
-        $userAttend = User::where('attendance', 1)->where('category', 'king')->whereNotIn('id', [$user_id])->get();
+        $userAttend = User::where('attendance', 1)->where('category', 'king')->whereNotNull('img_path')->whereNotIn('id', [$user_id])->get();
         return view('vote.male', ['candidate' => $userAttend, 'user_id' => $voter]);
     }
 
     public function vote_female($user_id)
     {
         $voter = $this->checkUser($user_id);
-        $userAttend = User::where('attendance', 1)->where('category', 'queen')->whereNotIn('id', [$user_id])->get();
+        $userAttend = User::where('attendance', 1)->where('category', 'queen')->whereNotNull('img_path')->whereNotIn('id', [$user_id])->get();
         return view('vote.female', ['candidate' => $userAttend, 'user_id' => $voter]);
     }
 

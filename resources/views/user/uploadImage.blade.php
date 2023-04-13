@@ -30,7 +30,8 @@
                     <input type="file" id="file-input" class="hidden" accept="image/*">
 
                     <br />
-                    <button id="take-snapshot-button" class="border border-black border-solid p-2 rounded w-full" type="button">Snap your OOTD</button>
+                    <button id="take-snapshot-button" class="border border-black border-solid p-2 rounded w-full mb-5" type="button">Snap your OOTD</button>
+                    <button id="no-snapshot-button" class="border border-black border-solid p-2 rounded w-full" type="button">No Photo, just want to vote.</button>
                     <input type="hidden" name="image" class="image-tag">
                     <input type="hidden" name="username" value="{{ $name }}">
                     <input type="hidden" name="user_id" value="{{ $user_id }}">
@@ -153,5 +154,14 @@
             reader.readAsDataURL(file);
         });
     // }
+
+    // Add a click event listener to the "no-snapshot-button"
+    document.getElementById('no-snapshot-button').addEventListener('click', () => {
+        // Enable the submit button
+        submitButton.disabled = false;
+        submitButton.classList.remove('bg-gray-500');
+        submitButton.classList.add('bg-blue-500');
+    });
+
 </script>
 @endsection
